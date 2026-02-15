@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500), // Length of the animation between images
       vsync: this,
     );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     setState(() => _counter += step);
   }
 
+  // Logic for decrement button
   void _decrementCounter() {
     if (_counter > 0) {
       setState(() => _counter--);
@@ -66,6 +67,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     }
   }
 
+  // Flips _isDark from True to False or vice versa to change the theme
   void _toggleTheme() {
     setState(() {
     _isDark = !_isDark;
@@ -73,10 +75,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 }
 
   void _toggleImage() {
+  // Fade out the current image
   _controller.reverse(from: 1).then((_) {
-    // swap the image after fade-out completes
+    // Swap the image after fade-out completes
     setState(() => _isFirstImage = !_isFirstImage);
-    _controller.forward(from: 0); // fade in new image
+    _controller.forward(from: 0); // Fade in new image
   });
 }
 
@@ -154,8 +157,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                 opacity: _fade,
                 child: Image.asset(
                   _isFirstImage ? 'assets/image1.jpg' : 'assets/image2.jpg',
-                  width: 180,
-                  height: 180,
+                  width: 200,
+                  height: 250,
                   fit: BoxFit.cover,
                 ),
               ),
