@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500), // Length of the animation between images
+      duration: const Duration(milliseconds: 500), // Length of the fade between images
       vsync: this,
     );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
@@ -54,13 +54,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     setState(() => _counter += step);
   }
 
-  // Logic for decrement button
+  // Logic for decrement and reset buttons
   void _decrementCounter() {
     if (_counter > 0) {
       setState(() => _counter--);
     }
   }
-
   void _resetCounter() {
     if (_counter > 0) {
       setState(() => _counter = 0);
@@ -86,13 +85,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
+      themeMode: _isDark ? ThemeMode.dark : ThemeMode.light, // Sets theme depending on _isDark value
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('CW1 Counter & Toggle'),
           actions: [
+            // Button to change theme on the AppBar in the top right
              IconButton(
               onPressed: _toggleTheme,
               icon: Icon(_isDark ? Icons.light_mode : Icons.dark_mode),
